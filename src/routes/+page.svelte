@@ -89,7 +89,7 @@
 				payload: { cards: res }
 			});
 		},
-		create: async (title: string = 'Untitled') => {
+		create: async (title = 'Untitled') => {
 			creatingCard = true;
 
 			const res = await trpc($page).createCard.mutate({ title });
@@ -159,7 +159,7 @@
 	{#await cardCrud.read()}
 		<Spinner />
 	{:then}
-		{#each cards as card}
+		{#each cards as card (card.id)}
 			<CardComponent {...{ ...card, taskCrud, cardCrud }} />
 		{/each}
 	{/await}
